@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NutriConnect — Meals Built Around Your Health</title>
+  <meta name="description" content="Personalized meals from audited Seattle restaurants, portioned and delivered to your door. For people working with dietitians, managing health conditions, or simply eating better." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #1C1C1C;
+      --ink-2:     #4A4A4A;
+      --ink-3:     #888;
+      --teal:      #006D75;
+      --teal-mid:  #008C96;
+      --teal-pale: #E8F4F5;
+      --cream:     #FAF8F4;
+      --warm:      #F3EFE9;
+      --white:     #FFFFFF;
+      --border:    #E2DDD6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Lora', Georgia, serif;
+      line-height: 1.2;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(250,248,244,.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 28px; max-width: 1120px; margin: 0 auto;
+    }
+    .nav-logo {
+      font-family: 'Lora', serif; font-weight: 700; font-size: 1.125rem;
+      color: var(--ink); letter-spacing: -.01em;
+    }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a {
+      font-size: .875rem; font-weight: 500; color: var(--ink-2);
+      transition: color .15s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-cta {
+      background: var(--teal); color: #fff !important;
+      padding: 9px 20px; border-radius: 6px;
+      font-size: .875rem; font-weight: 600;
+      transition: background .15s;
+    }
+    .nav-cta:hover { background: var(--ink) !important; }
+
+    @media (max-width: 640px) {
+      .nav-links .hide-sm { display: none; }
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 6px; border: none;
+      font-family: inherit; font-size: .9375rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      transition: background .15s, transform .1s;
+    }
+    .btn:active { transform: scale(.97); }
+    .btn-dark { background: var(--ink); color: #fff; }
+    .btn-dark:hover { background: #333; }
+    .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--ink); }
+    .btn-teal { background: var(--teal); color: #fff; }
+    .btn-teal:hover { background: var(--ink); }
+    .btn:disabled { opacity: .55; cursor: not-allowed; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 48px 0 72px;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      right: -80px; top: -120px;
+      width: 560px; height: 560px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,109,117,.08) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      font-size: .8125rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 5.5vw, 4rem);
+      color: var(--ink);
+      letter-spacing: -.025em;
+      margin-bottom: 24px;
+    }
+    .hero h1 em { font-style: italic; color: var(--teal); }
+    .hero-sub {
+      font-size: 1.0625rem; color: var(--ink-2);
+      line-height: 1.75; margin-bottom: 36px;
+      max-width: 480px;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-proof {
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      display: flex; gap: 32px; flex-wrap: wrap;
+    }
+    .hero-proof-item { font-size: .8125rem; color: var(--ink-3); }
+    .hero-proof-item strong { display: block; font-size: .9375rem; color: var(--ink); font-weight: 600; }
+    .hero-img {
+      border-radius: 16px; overflow: hidden;
+      height: 520px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.13);
+    }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    @media (max-width: 860px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-img { height: 320px; }
+    }
+
+    /* ── Marquee strip ── */
+    .strip {
+      background: var(--teal);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .strip-inner {
+      display: inline-flex; gap: 48px;
+      animation: marquee 22s linear infinite;
+    }
+    .strip-item {
+      font-size: .8125rem; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; color: rgba(255,255,255,.85);
+      display: inline-flex; align-items: center; gap: 14px;
+    }
+    .strip-dot { color: rgba(255,255,255,.35); font-size: 1rem; }
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Who we serve ── */
+    .serve {
+      padding: 100px 0;
+      background: var(--warm);
+    }
+    .serve-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: end;
+      margin-bottom: 72px;
+    }
+    .serve-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--ink);
+      letter-spacing: -.02em;
+      border-left: 3px solid var(--teal);
+      padding-left: 20px;
+    }
+    .serve-header p { font-size: 1rem; color: var(--ink-2); line-height: 1.75; }
+    .serve-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .serve-card {
+      border-right: 1px solid var(--border);
+      transition: background .2s;
+      overflow: hidden;
+    }
+    .serve-card:last-child { border-right: none; }
+    .serve-card:hover { background: var(--cream); }
+    .serve-card-photo {
+      width: 100%; height: 140px; overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .serve-card-photo img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .4s ease;
+    }
+    .serve-card:hover .serve-card-photo img { transform: scale(1.04); }
+    .serve-card-body { padding: 28px 26px; }
+    .serve-tag {
+      font-size: .75rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 14px;
+    }
+    .serve-card h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.0625rem; font-weight: 600;
+      color: var(--ink); margin-bottom: 12px;
+      line-height: 1.35;
+    }
+    .serve-card p { font-size: .875rem; color: var(--ink-2); line-height: 1.7; }
+
+    @media (max-width: 900px) {
+      .serve-header { grid-template-columns: 1fr; gap: 20px; }
+      .serve-grid { grid-template-columns: 1fr 1fr; }
+      .serve-card { border-bottom: 1px solid var(--border); }
+      .serve-card:nth-child(2n) { border-right: none; }
+    }
+    @media (max-width: 560px) {
+      .serve-grid { grid-template-columns: 1fr; }
+      .serve-card { border-right: none; }
+    }
+
+    /* ── How It Works ── */
+    .hiw {
+      padding: 100px 0;
+      background: var(--cream);
+    }
+    .hiw-intro { margin-bottom: 72px; }
+    .hiw-intro h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -.02em; color: var(--ink);
+      max-width: 540px;
+    }
+    .hiw-steps { display: flex; flex-direction: column; gap: 0; position: relative; }
+    .hiw-steps::before {
+      content: '';
+      position: absolute;
+      left: 39px; top: 48px; bottom: 48px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--teal), var(--border));
+      z-index: 0;
+    }
+    .hiw-step {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .hiw-step:last-child { border-bottom: none; }
+    .hiw-num {
+      font-family: 'Lora', serif;
+      font-size: 3.5rem; font-weight: 700; line-height: 1;
+      color: var(--border);
+      position: relative; z-index: 1;
+    }
+    @media (max-width: 820px) { .hiw-steps::before { display: none; } }
+    .hiw-text h3 {
+      font-size: 1.375rem; font-weight: 600;
+      color: var(--ink); margin-bottom: 14px;
+      letter-spacing: -.01em;
+    }
+    .hiw-text p { font-size: .9375rem; color: var(--ink-2); line-height: 1.75; }
+    .hiw-text p + p { margin-top: 12px; }
+    .hiw-text .note {
+      margin-top: 16px;
+      font-size: .8125rem; color: var(--ink-3);
+    }
+    .hiw-photo {
+      border-radius: 12px; overflow: hidden; height: 280px;
+      box-shadow: 0 6px 24px rgba(0,0,0,.09);
+    }
+    .hiw-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    @media (max-width: 820px) {
+      .hiw-step { grid-template-columns: 48px 1fr; }
+      .hiw-photo { display: none; }
+      .hiw-num { font-size: 2rem; }
+    }
+
+    /* ── Glass pull quote ── */
+    .glass-section {
+      background: var(--ink);
+      padding: 100px 0;
+    }
+    .glass-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .glass-img {
+      border-radius: 16px; overflow: hidden;
+      height: 500px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.4);
+    }
+    .glass-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .glass-text blockquote {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.375rem, 2.5vw, 1.875rem);
+      font-style: italic;
+      color: #fff;
+      line-height: 1.5;
+      margin-bottom: 36px;
+      letter-spacing: -.01em;
+    }
+    .glass-text p { font-size: .9375rem; color: rgba(255,255,255,.6); line-height: 1.8; margin-bottom: 16px; }
+    .glass-details {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin-top: 36px;
+    }
+    .glass-detail {
+      background: rgba(255,255,255,.07);
+      border-radius: 10px; padding: 18px 20px;
+    }
+    .glass-detail strong { display: block; color: #fff; font-size: .9375rem; margin-bottom: 6px; }
+    .glass-detail span { font-size: .8125rem; color: rgba(255,255,255,.5); line-height: 1.55; }
+
+    @media (max-width: 860px) {
+      .glass-grid { grid-template-columns: 1fr; gap: 48px; }
+      .glass-img { height: 300px; }
+    }
+
+    /* ── Reheating ── */
+    .reheat {
+      padding: 80px 0;
+      background: var(--warm);
+      border-top: 1px solid var(--border);
+    }
+    .reheat-header { margin-bottom: 48px; }
+    .reheat-header h2 { font-size: clamp(1.625rem, 3vw, 2.25rem); letter-spacing: -.02em; color: var(--ink); margin-bottom: 10px; }
+    .reheat-header p { font-size: .9375rem; color: var(--ink-2); max-width: 560px; line-height: 1.7; }
+    .reheat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .reheat-card {
+      background: var(--white);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 28px;
+    }
+    .reheat-card h4 { font-family: 'Lora', serif; font-size: 1rem; color: var(--ink); margin-bottom: 18px; }
+    .reheat-steps { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .reheat-steps li { display: flex; gap: 12px; font-size: .875rem; color: var(--ink-2); line-height: 1.6; }
+    .step-dot {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--teal-pale); color: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .6875rem; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+    .reheat-note { margin-top: 20px; font-size: .8125rem; color: var(--ink-3); }
+
+    @media (max-width: 720px) { .reheat-grid { grid-template-columns: 1fr; } }
+
+    /* ── Value ── */
+    .values {
+      padding: 100px 0;
+      background: var(--white);
+    }
+    .values-header { margin-bottom: 72px; }
+    .values-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -.02em; color: var(--ink);
+      max-width: 600px;
+    }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; }
+    .value-item {}
+    .value-num {
+      font-family: 'Lora', serif;
+      font-size: 4rem; font-weight: 700; line-height: 1;
+      color: var(--border);
+      margin-bottom: 16px;
+      letter-spacing: -.04em;
+    }
+    .value-item h3 { font-size: 1.1875rem; color: var(--ink); margin-bottom: 10px; font-weight: 600; letter-spacing: -.01em; }
+    .value-item p { font-size: .9375rem; color: var(--ink-2); line-height: 1.75; }
+
+    @media (max-width: 720px) { .values-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+    /* ── Form ── */
+    .form-section {
+      padding: 100px 0;
+      background: var(--cream);
+    }
+    .form-outer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .form-context {}
+    .form-eyebrow {
+      font-size: .8125rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 20px;
+    }
+    .form-context h2 {
+      font-size: clamp(1.875rem, 3.5vw, 2.75rem);
+      color: var(--ink); letter-spacing: -.02em;
+      margin-bottom: 20px;
+    }
+    .form-context p { font-size: .9375rem; color: var(--ink-2); line-height: 1.75; margin-bottom: 32px; }
+    .form-context-detail {
+      display: flex; flex-direction: column; gap: 18px;
+      padding-top: 28px; border-top: 1px solid var(--border);
+    }
+    .detail-row { display: flex; gap: 14px; align-items: flex-start; }
+    .detail-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--teal-pale); color: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; font-weight: 700; flex-shrink: 0;
+    }
+    .detail-row p { font-size: .875rem; color: var(--ink-2); line-height: 1.65; }
+
+    .form-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+    }
+    .form-card h3 { font-size: 1.125rem; color: var(--ink); margin-bottom: 28px; font-weight: 600; }
+
+    .field { margin-bottom: 20px; }
+    .field label { display: block; font-size: .875rem; font-weight: 500; color: var(--ink-2); margin-bottom: 6px; }
+    .field label .req { color: #E5534B; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: .9375rem;
+      color: var(--ink);
+      background: var(--white);
+      outline: none;
+      transition: border-color .15s, box-shadow .15s;
+      -webkit-appearance: none;
+    }
+    input:focus, textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(0,109,117,.1); }
+    input.err, textarea.err { border-color: #E5534B; }
+    input.err:focus, textarea.err:focus { box-shadow: 0 0 0 3px rgba(229,83,75,.1); }
+    textarea { resize: vertical; min-height: 90px; }
+    .ferr { font-size: .8125rem; color: #E5534B; margin-top: 4px; display: none; }
+
+    .radio-group { display: flex; gap: 10px; margin-top: 6px; }
+    .radio-opt {
+      flex: 1; display: flex; align-items: center; justify-content: space-between;
+      padding: 11px 14px; border: 1.5px solid var(--border);
+      border-radius: 8px; cursor: pointer;
+      font-size: .875rem; font-weight: 500; color: var(--ink-2);
+      transition: border-color .15s, background .15s;
+    }
+    .radio-opt:hover { border-color: var(--teal); }
+    .radio-opt.on { border-color: var(--teal); background: var(--teal-pale); color: var(--teal); }
+    .radio-opt input { display: none; }
+    .radio-check {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: border-color .15s, background .15s;
+      font-size: .625rem; color: transparent;
+    }
+    .radio-opt.on .radio-check {
+      border-color: var(--teal); background: var(--teal);
+      color: #fff;
+    }
+
+    .form-submit { width: 100%; margin-top: 4px; }
+    .form-privacy {
+      margin-top: 14px; text-align: center;
+      font-size: .75rem; color: var(--ink-3); line-height: 1.6;
+    }
+
+    .form-success {
+      display: none;
+      text-align: center; padding: 48px 0;
+    }
+    .success-mark {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: rgba(0,109,117,.1); color: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; margin: 0 auto 20px;
+    }
+    .form-success h3 { font-size: 1.375rem; color: var(--ink); margin-bottom: 10px; }
+    .form-success p { font-size: .9375rem; color: var(--ink-2); line-height: 1.7; }
+
+    @media (max-width: 860px) {
+      .form-outer { grid-template-columns: 1fr; gap: 48px; }
+    }
+    @media (max-width: 480px) {
+      .field-row { grid-template-columns: 1fr; }
+      .form-card { padding: 28px 20px; }
+    }
+
+    /* ── Disclaimer ── */
+    .disclaimer {
+      padding: 40px 0;
+      background: var(--warm);
+      border-top: 1px solid var(--border);
+    }
+    .disclaimer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .disclaimer-block p:first-child { font-size: .8125rem; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+    .disclaimer-block p { font-size: .8125rem; color: var(--ink-2); line-height: 1.65; }
+
+    @media (max-width: 640px) { .disclaimer-grid { grid-template-columns: 1fr; } }
+
+    /* ── Contact ── */
+    .contact {
+      padding: 80px 0;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .contact-text h2 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      letter-spacing: -.02em; color: var(--ink);
+      margin-bottom: 16px;
+    }
+    .contact-text p { font-size: .9375rem; color: var(--ink-2); line-height: 1.75; margin-bottom: 12px; }
+    .contact-card {
+      background: var(--teal-pale);
+      border: 1px solid rgba(0,109,117,.15);
+      border-radius: 14px;
+      padding: 36px 40px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .contact-label {
+      font-size: .75rem; font-weight: 700; letter-spacing: .09em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 4px;
+    }
+    .contact-email {
+      font-family: 'Lora', serif;
+      font-size: 1.375rem; font-weight: 600;
+      color: var(--teal);
+      word-break: break-all;
+    }
+    .contact-email:hover { color: var(--ink); }
+    .contact-note { font-size: .875rem; color: var(--ink-3); line-height: 1.6; margin-top: 8px; }
+
+    @media (max-width: 760px) {
+      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .contact-card { padding: 28px 24px; }
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--ink);
+      padding: 36px 28px;
+    }
+    .footer-inner {
+      max-width: 1120px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-logo { font-family: 'Lora', serif; font-weight: 700; color: #fff; font-size: 1rem; }
+    .footer-logo span { color: var(--teal-mid); }
+    footer p { font-size: .8125rem; color: rgba(255,255,255,.35); }
+  </style>
+</head>
+
+<body>
+
+<!-- ── Nav ── -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Nutri<span>Connect</span></div>
+    <div class="nav-links">
+      <a href="#how-it-works" class="hide-sm">How It Works</a>
+      <a href="#contact" class="hide-sm">Contact</a>
+      <a href="#interest" class="nav-cta">Express Interest</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+
+      <div>
+        <p class="hero-eyebrow">Launching Greater Seattle · Late June 2026</p>
+        <h1>Meals built around <em>how you eat.</em></h1>
+        <p class="hero-sub">
+          We partner with audited local restaurants to cook and deliver fresh, portioned meals
+          matched to your care plan, your preferences, and your neighbourhood.
+        </p>
+        <div class="hero-actions">
+          <a href="#interest" class="btn btn-dark">Express Interest</a>
+          <a href="#how-it-works" class="btn btn-ghost">How It Works</a>
+        </div>
+        <div class="hero-proof">
+          <div class="hero-proof-item">
+            <strong>Portion-aware</strong>
+            Sized to your exact care plan
+          </div>
+          <div class="hero-proof-item">
+            <strong>RD-coordinated</strong>
+            We follow your dietitian's requirements
+          </div>
+          <div class="hero-proof-item">
+            <strong>Zero plastic</strong>
+            Glass containers, reusable everything
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=82"
+             alt="Fresh portioned meals in glass containers" loading="eager"
+             onerror="this.style.background='#c9e8ea'" />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── Marquee ── -->
+<div class="strip" aria-hidden="true">
+  <div class="strip-inner">
+    <span class="strip-item">Portion-aware meals <span class="strip-dot">·</span></span>
+    <span class="strip-item">RD-coordinated <span class="strip-dot">·</span></span>
+    <span class="strip-item">Reusable glass containers <span class="strip-dot">·</span></span>
+    <span class="strip-item">Greater Seattle delivery <span class="strip-dot">·</span></span>
+    <span class="strip-item">Audited local restaurants <span class="strip-dot">·</span></span>
+    <span class="strip-item">No single-use packaging <span class="strip-dot">·</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="strip-item">Portion-aware meals <span class="strip-dot">·</span></span>
+    <span class="strip-item">RD-coordinated <span class="strip-dot">·</span></span>
+    <span class="strip-item">Reusable glass containers <span class="strip-dot">·</span></span>
+    <span class="strip-item">Greater Seattle delivery <span class="strip-dot">·</span></span>
+    <span class="strip-item">Audited local restaurants <span class="strip-dot">·</span></span>
+    <span class="strip-item">No single-use packaging <span class="strip-dot">·</span></span>
+  </div>
+</div>
+
+
+<!-- ── Who We Serve ── -->
+<section class="serve">
+  <div class="wrap">
+    <div class="serve-header">
+      <h2>Made for people who need food to <em>actually work.</em></h2>
+      <p>Whether you're navigating an eating disorder, managing a chronic condition, or just done with meal prep, we handle the details so you don't have to.</p>
+    </div>
+    <div class="serve-grid">
+      <div class="serve-card">
+        <div class="serve-card-photo">
+          <img src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=600&q=80"
+               alt="Portioned meal in a bowl" loading="lazy" onerror="this.style.background='#c9e8ea'" />
+        </div>
+        <div class="serve-card-body">
+          <p class="serve-tag">Eating Disorders</p>
+          <h3>Meals built around your care plan</h3>
+          <p>Portion sizes set to what your RD specifies. If calorie counts or serving weights feel triggering, we leave them off the packaging entirely.</p>
+        </div>
+      </div>
+      <div class="serve-card">
+        <div class="serve-card-photo">
+          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80"
+               alt="Fresh colourful food bowls" loading="lazy" onerror="this.style.background='#c9e8ea'" />
+        </div>
+        <div class="serve-card-body">
+          <p class="serve-tag">Chronic Conditions</p>
+          <h3>Dialed in for diabetes, renal diets, and more</h3>
+          <p>Whether it's low-glycaemic meals, a renal diet, or something your doctor specified, we work to the exact brief and coordinate with your care team.</p>
+        </div>
+      </div>
+      <div class="serve-card">
+        <div class="serve-card-photo">
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=600&q=80"
+               alt="Fresh food preparation" loading="lazy" onerror="this.style.background='#c9e8ea'" />
+        </div>
+        <div class="serve-card-body">
+          <p class="serve-tag">RD Patients</p>
+          <h3>Your dietitian prescribes. We cook.</h3>
+          <p>Already working with an RD? We open a direct line between you, your dietitian, and our kitchen. Every meal follows what they've laid out. Nothing gets improvised.</p>
+        </div>
+      </div>
+      <div class="serve-card">
+        <div class="serve-card-photo">
+          <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=600&q=80"
+               alt="Healthy everyday meal" loading="lazy" onerror="this.style.background='#c9e8ea'" />
+        </div>
+        <div class="serve-card-body">
+          <p class="serve-tag">General Wellness</p>
+          <h3>Good food, without clearing your schedule</h3>
+          <p>No diagnosis needed. If you just want fresh, properly cooked meals from local Seattle restaurants without the shopping and prep, that's enough.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── How It Works ── -->
+<section id="how-it-works" class="hiw">
+  <div class="wrap">
+    <div class="hiw-intro">
+      <h2>From first conversation to your doorstep.</h2>
+    </div>
+    <div class="hiw-steps">
+
+      <div class="hiw-step">
+        <div class="hiw-num">01</div>
+        <div class="hiw-text">
+          <h3>We build a plan around you</h3>
+          <p>If you're working with an RD, we open a three-way channel between you, your dietitian, and our team. We follow their requirements, work with you on food preferences, and let you decide how many meals to order each week.</p>
+          <p>You can choose from our rotating template menus, follow a plan your RD has prescribed, or bring your own requests. Pricing is based on portion size, ingredients, and complexity. You decide what to order.</p>
+          <p class="note">Minimum 6 meals per delivery. We deliver once or twice a week depending on your volume.</p>
+        </div>
+        <div class="hiw-photo">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80"
+               alt="Fresh ingredients" loading="lazy" onerror="this.style.background='#c9e8ea'" />
+        </div>
+      </div>
+
+      <div class="hiw-step">
+        <div class="hiw-num">02</div>
+        <div class="hiw-text">
+          <h3>Local restaurants cook it fresh</h3>
+          <p>After you pay, your order goes to the nearest audited partner restaurant. They prep and cook over the weekend. Nothing frozen, nothing batch-processed.</p>
+          <p>Meals are delivered the same day they're cooked or the morning after. Prefer to skip the delivery fee? You can pick up directly from the restaurant.</p>
+        </div>
+        <div class="hiw-photo">
+          <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=800&q=80"
+               alt="Food being prepared" loading="lazy" onerror="this.style.background='#c9e8ea'" />
+        </div>
+      </div>
+
+      <div class="hiw-step">
+        <div class="hiw-num">03</div>
+        <div class="hiw-text">
+          <h3>Delivered cold. Picked up after.</h3>
+          <p>Meals arrive in an insulated cooler with reusable gel ice packs. When you're done, rinse the glass containers, pack them back with the ice packs, and leave the cooler outside.</p>
+          <p>We pick it up before your next delivery, clean everything, and reuse it. No single-use packaging, ever.</p>
+        </div>
+        <div class="hiw-photo">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80"
+               alt="Meals ready for delivery" loading="lazy" onerror="this.style.background='#c9e8ea'" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── Glass section ── -->
+<section class="glass-section">
+  <div class="wrap">
+    <div class="glass-grid">
+
+      <div class="glass-img">
+        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=82"
+             alt="Meals in glass containers" loading="lazy" onerror="this.style.background='#2A4550'" />
+      </div>
+
+      <div class="glass-text">
+        <blockquote>"The last thing we want is to strip away the emotional value of food."</blockquote>
+        <p>We use reusable glass containers for everything. Not primarily for the environment (though that matters), but because meals in glass don't feel commercial.</p>
+        <p>If we're replacing someone's diet entirely, a microwaveable plastic box is the wrong message. And if we're calling ourselves health-optimized, having clients consume microplastics daily is contradictory. Glass keeps food tasting as it was intended. It goes in the microwave, oven, or air fryer. It looks like something you'd make yourself.</p>
+        <div class="glass-details">
+          <div class="glass-detail">
+            <strong>After your 30-day trial</strong>
+            <span>We ask for a one-time cost to cover the containers. This lowers your per-meal cost going forward.</span>
+          </div>
+          <div class="glass-detail">
+            <strong>Microwave &amp; oven safe</strong>
+            <span>Let glass rest at room temperature 10–15 min before reheating to avoid thermal shock.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ── Interest Form ── -->
+<section id="interest" class="form-section">
+  <div class="wrap">
+    <div class="form-outer">
+
+      <div class="form-context">
+        <p class="form-eyebrow">Launching Late June – Early July 2026</p>
+        <h2>Join our early access list.</h2>
+        <p>We're launching in the Greater Seattle area first. Leave your info and we'll reach out personally before launch to confirm availability in your area.</p>
+        <div class="form-context-detail">
+          <div class="detail-row">
+            <div class="detail-num">1</div>
+            <p>Fill in the form. Takes under 2 minutes.</p>
+          </div>
+          <div class="detail-row">
+            <div class="detail-num">2</div>
+            <p>We confirm service availability in your neighbourhood and answer any questions.</p>
+          </div>
+          <div class="detail-row">
+            <div class="detail-num">3</div>
+            <p>If you're working with an RD, we set up a coordination channel before your first order.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div id="form-wrap" class="form-card">
+          <h3>Express your interest</h3>
+          <form id="interest-form" novalidate>
+
+            <div class="field">
+              <label for="f-name">Full Name <span class="req">*</span></label>
+              <input type="text" id="f-name" placeholder="Jane Smith" autocomplete="name" />
+              <div class="ferr" id="f-name-err"></div>
+            </div>
+
+            <div class="field-row field">
+              <div>
+                <label for="f-phone">Phone <span class="req">*</span></label>
+                <input type="tel" id="f-phone" placeholder="+1 (206) 555-0000" autocomplete="tel" />
+                <div class="ferr" id="f-phone-err"></div>
+              </div>
+              <div>
+                <label for="f-email">Email <span class="req">*</span></label>
+                <input type="email" id="f-email" placeholder="jane@example.com" autocomplete="email" />
+                <div class="ferr" id="f-email-err"></div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="f-address">Address <span class="req">*</span></label>
+              <input type="text" id="f-address" placeholder="123 Pike St, Seattle, WA" autocomplete="street-address" />
+              <p style="font-size:.8125rem;color:var(--ink-3);margin-top:4px;">Used to confirm service availability in your neighbourhood.</p>
+              <div class="ferr" id="f-address-err"></div>
+            </div>
+
+            <div class="field">
+              <label>Working with a Registered Dietitian?</label>
+              <div class="radio-group">
+                <label class="radio-opt" id="rd-yes-label">
+                  <input type="radio" name="working_with_rd" value="yes" id="rd-yes" />
+                  <span>Yes</span>
+                  <span class="radio-check">&#10003;</span>
+                </label>
+                <label class="radio-opt" id="rd-no-label">
+                  <input type="radio" name="working_with_rd" value="no" id="rd-no" />
+                  <span>No</span>
+                  <span class="radio-check">&#10003;</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="f-reason">What brings you here? <span style="font-weight:400;color:var(--ink-3);">(optional)</span></label>
+              <textarea id="f-reason" rows="3" placeholder="e.g. Managing type 2 diabetes, working through an eating disorder with my RD..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-teal form-submit" id="f-submit">
+              <span id="f-submit-txt">Submit</span>
+            </button>
+            <p class="form-privacy">Your information is stored securely and only used to contact you about our launch.</p>
+
+          </form>
+        </div>
+
+        <div class="form-success" id="form-success">
+          <div class="success-mark">&#10003;</div>
+          <h3>You're on the list.</h3>
+          <p>We'll be in touch before launch to confirm availability in your area and answer any questions.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── Disclaimer ── -->
+<section class="disclaimer">
+  <div class="wrap">
+    <div style="max-width:640px;margin:0 auto;text-align:center;">
+      <p style="font-size:.8125rem;font-weight:600;color:var(--ink);margin-bottom:5px;">Allergen Disclosure</p>
+      <p style="font-size:.8125rem;color:var(--ink-2);line-height:1.65;">NutriConnect meals are prepared in commercial kitchens that handle all major allergens including tree nuts, peanuts, milk, eggs, wheat/gluten, soy, fish, shellfish, and sesame. Cross-contact cannot be fully prevented. Full ingredient and allergen information will be provided before every order is confirmed.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── Contact ── -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="contact-inner">
+      <div class="contact-text">
+        <h2>Get in touch.</h2>
+        <p>Have a question about the service, your care plan, or how we work with dietitians? We're a small team and we read every message.</p>
+        <p>We typically respond within one business day.</p>
+      </div>
+      <div class="contact-card">
+        <p class="contact-label">Email us</p>
+        <a class="contact-email" href="mailto:contact@nutriconnect.us">contact@nutriconnect.us</a>
+        <p class="contact-note">For urgent clinical questions, please contact your registered dietitian directly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nutri<span>Connect</span></div>
+    <p>© 2026 NutriConnect. Greater Seattle Area.</p>
+    <p>Meals are not a substitute for medical advice.</p>
+  </div>
+</footer>
+
+
+<script type="module">
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+
+  const supabase = createClient(
+    'https://bipjpavabqckbauftnrp.supabase.co',
+    'sb_publishable_Rq4zUw3M5mwH2gTLIPITow_qcz2pJ5N'
+  )
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+  function setErr(inputId, errId, msg) {
+    const inp = document.getElementById(inputId)
+    const err = document.getElementById(errId)
+    if (inp) inp.classList.toggle('err', !!msg)
+    if (err) { err.textContent = msg; err.style.display = msg ? 'block' : 'none' }
+  }
+
+  function clearErrs() {
+    [['f-name','f-name-err'],['f-phone','f-phone-err'],['f-email','f-email-err'],['f-address','f-address-err']]
+      .forEach(([a,b]) => setErr(a,b,''))
+  }
+
+  document.querySelectorAll('input[name="working_with_rd"]').forEach(r => {
+    r.addEventListener('change', () => {
+      document.getElementById('rd-yes-label').classList.toggle('on', document.getElementById('rd-yes').checked)
+      document.getElementById('rd-no-label').classList.toggle('on', document.getElementById('rd-no').checked)
+    })
+  })
+
+  document.getElementById('interest-form').addEventListener('submit', async e => {
+    e.preventDefault()
+    clearErrs()
+
+    const name    = document.getElementById('f-name').value.trim()
+    const phone   = document.getElementById('f-phone').value.trim()
+    const email   = document.getElementById('f-email').value.trim()
+    const address = document.getElementById('f-address').value.trim()
+    const rdVal   = document.querySelector('input[name="working_with_rd"]:checked')?.value ?? null
+    const reason  = document.getElementById('f-reason').value.trim()
+
+    let ok = true
+    if (!name)                      { setErr('f-name','f-name-err','Full name is required'); ok=false }
+    if (!phone)                     { setErr('f-phone','f-phone-err','Phone number is required'); ok=false }
+    if (!email)                     { setErr('f-email','f-email-err','Email is required'); ok=false }
+    else if (!EMAIL_RE.test(email)) { setErr('f-email','f-email-err','Please enter a valid email'); ok=false }
+    if (!address)                   { setErr('f-address','f-address-err','Address is required'); ok=false }
+    if (!ok) return
+
+    const btn = document.getElementById('f-submit')
+    const txt = document.getElementById('f-submit-txt')
+    btn.disabled = true
+    txt.textContent = 'Submitting…'
+
+    try {
+      const { error } = await supabase.from('interest_submissions').insert([{
+        name,
+        phone,
+        email,
+        address,
+        working_with_rd: rdVal === 'yes' ? true : rdVal === 'no' ? false : null,
+        reason: reason || null,
+      }])
+      if (error) throw error
+      document.getElementById('form-wrap').style.display    = 'none'
+      document.getElementById('form-success').style.display = 'block'
+    } catch (err) {
+      console.error(err)
+      btn.disabled = false
+      txt.textContent = 'Submit'
+      alert('Something went wrong. Please try again in a moment.')
+    }
+  })
+</script>
+
+</body>
+</html>
